@@ -25,6 +25,7 @@ data class RedditItem(
 )
 
 data class RedditPublication(
+    val id: String,
     val author: String?,
     val thumbnail: String?,
     @SerializedName("num_comments")

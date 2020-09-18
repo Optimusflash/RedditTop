@@ -1,12 +1,13 @@
 package com.optimus.reddittop.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
-import com.optimus.reddittop.data.model.RedditResponse
+import androidx.lifecycle.*
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.optimus.reddittop.data.model.RedditItem
+import com.optimus.reddittop.data.paging.RedditDataSource
+import com.optimus.reddittop.data.paging.RedditDataSourceFactory
 import com.optimus.reddittop.data.repositories.RedditRepository
-import kotlinx.coroutines.launch
+import com.optimus.reddittop.utils.State
 import javax.inject.Inject
 
 /**
@@ -14,16 +15,35 @@ import javax.inject.Inject
  */
 class MainViewModel @Inject constructor(private val repository: RedditRepository) : ViewModel() {
 
-    private lateinit var _redditResponse: LiveData<RedditResponse>
-    val redditResponse: LiveData<RedditResponse>
-        get() = _redditResponse
+    private lateinit var _redditItemPageList: LiveData<PagedList<RedditItem>>
+    val redditPublicationPageList: LiveData<PagedList<RedditItem>>
+        get() = _redditItemPageList
+
+    private lateinit var _redditDataSource: MutableLiveData<RedditDataSource>
+
 
     init {
-        viewModelScope.launch {
-            _redditResponse = liveData {
-                emit(repository.loadRedditPublications())
-            }
-        }
+        setupPagedListAndDataSource()
     }
 
+    private fun setupPagedListAndDataSource() {
+        val redditDataSourceFactory = RedditDataSourceFactory(viewModelScope)
+        val config = PagedList.Config.Builder()
+            .setPageSize(10)
+            .setEnablePlaceholders(false)
+            .build()
+        _redditItemPageList = LivePagedListBuilder(redditDataSourceFactory, config).build()
+        _redditDataSource = redditDataSourceFactory.redditLiveDataSource
+    }
+
+    fun getState(): LiveData<State> =
+        Transformations.switchMap(_redditDataSource, RedditDataSource::state)
+
+    fun retry() {
+        _redditDataSource.value?.retry()
+    }
+
+    fun listIsEmpty(): Boolean {
+        return _redditItemPageList.value?.isEmpty() ?: true
+    }
 }

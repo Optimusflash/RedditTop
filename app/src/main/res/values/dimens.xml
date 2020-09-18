@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="iv_size_300">300dp</dimen>
+    <dimen name="global_spacing_4">4dp</dimen>
+    <dimen name="global_spacing_8">8dp</dimen>
+    <dimen name="global_spacing_12">12dp</dimen>
+    <dimen name="global_spacing_16">16dp</dimen>
+    <dimen name="global_spacing_24">24dp</dimen>
+    <dimen name="global_spacing_32">32dp</dimen>
+    <dimen name="button_size_32">32dp</dimen>
+</resources>
