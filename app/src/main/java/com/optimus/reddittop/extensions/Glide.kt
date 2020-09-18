@@ -11,6 +11,7 @@ import com.optimus.reddittop.R
 fun ImageView.loadImage(url: String?){
     Glide.with(context)
         .load(url)
+        .fitCenter()
         .error(R.drawable.no_image_found)
         .into(this)
 }

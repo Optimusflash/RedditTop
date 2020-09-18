@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.optimus.reddittop.data.model.RedditItem
 import com.optimus.reddittop.databinding.RvRedditPostSellBinding
 import com.optimus.reddittop.extensions.loadImage
+import com.optimus.reddittop.extensions.toRelativeDateFormat
 
 
 /**
@@ -26,7 +27,7 @@ class RedditPostViewHolder(
     fun bind (redditItem: RedditItem){
 
         binding.tvAuthorName.text = redditItem.redditPublication.author
-        binding.tvDateCreated.text = redditItem.redditPublication.createdDate.toString()
+        binding.tvDateCreated.text = redditItem.redditPublication.createdDate?.toRelativeDateFormat()
         binding.ivRedditPostImage.loadImage(redditItem.redditPublication.thumbnail)
         binding.tvCommentsCount.text = redditItem.redditPublication.commentsCount.toString()
         binding.root.setOnClickListener { onPostClick.invoke(redditItem.redditPublication.id) }

@@ -30,6 +30,6 @@ data class RedditPublication(
     val thumbnail: String?,
     @SerializedName("num_comments")
     val commentsCount: Int?,
-    @SerializedName("created")
+    @SerializedName("created_utc")
     val createdDate: Double?
 )
