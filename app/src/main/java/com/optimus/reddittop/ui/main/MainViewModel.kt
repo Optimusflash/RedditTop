@@ -1,5 +1,6 @@
 package com.optimus.reddittop.ui.main
 
+import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -14,13 +15,13 @@ import javax.inject.Inject
  * Created by Dmitriy Chebotar on 18.09.2020.
  */
 class MainViewModel @Inject constructor(private val repository: RedditRepository) : ViewModel() {
-
     private lateinit var _redditItemPageList: LiveData<PagedList<RedditItem>>
     val redditPublicationPageList: LiveData<PagedList<RedditItem>>
         get() = _redditItemPageList
-
     private lateinit var _redditDataSource: MutableLiveData<RedditDataSource>
-
+    private val _imageUrl = MutableLiveData<String>()
+    val imageUrl: LiveData<String>
+        get() = _imageUrl
 
     init {
         setupPagedListAndDataSource()
@@ -45,5 +46,9 @@ class MainViewModel @Inject constructor(private val repository: RedditRepository
 
     fun listIsEmpty(): Boolean {
         return _redditItemPageList.value?.isEmpty() ?: true
+    }
+
+    fun handleRvItemClick(imageUrl: String){
+        _imageUrl.value = imageUrl
     }
 }

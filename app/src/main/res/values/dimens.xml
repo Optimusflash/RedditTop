@@ -8,4 +8,5 @@
     <dimen name="global_spacing_24">24dp</dimen>
     <dimen name="global_spacing_32">32dp</dimen>
     <dimen name="button_size_32">32dp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
 </resources>

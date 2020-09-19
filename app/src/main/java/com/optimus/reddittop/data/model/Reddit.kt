@@ -31,5 +31,21 @@ data class RedditPublication(
     @SerializedName("num_comments")
     val commentsCount: Int?,
     @SerializedName("created_utc")
-    val createdDate: Double?
+    val createdDate: Double?,
+    val preview: Preview
+)
+
+data class Preview(
+    val images: List<Image>
+)
+
+data class Image(
+    @SerializedName("source")
+    val sourceImage: SourceImage
+)
+
+data class SourceImage(
+    val url: String,
+    val width : Int,
+    val height: Int,
 )

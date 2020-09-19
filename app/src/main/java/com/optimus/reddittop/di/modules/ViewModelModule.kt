@@ -2,6 +2,7 @@ package com.optimus.reddittop.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.optimus.reddittop.di.ViewModelKey
+import com.optimus.reddittop.ui.details.DetailsViewModel
 import com.optimus.reddittop.ui.main.MainViewModel
 import dagger.Binds
 import dagger.Module
@@ -16,4 +17,9 @@ abstract class ViewModelModule {
     @Binds
     @ViewModelKey(MainViewModel::class)
     abstract fun provideMainViewModel(mainViewModel: MainViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(DetailsViewModel::class)
+    abstract fun provideDetailsViewModel(detailsViewModel: DetailsViewModel): ViewModel
 }

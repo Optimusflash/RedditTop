@@ -2,29 +2,26 @@ package com.optimus.reddittop.ui.main
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.optimus.reddittop.R
 import com.optimus.reddittop.databinding.ActivityMainBinding
 import com.optimus.reddittop.di.Injector
 import com.optimus.reddittop.di.ViewModelFactory
+import com.optimus.reddittop.ui.details.DetailsActivity
 import com.optimus.reddittop.utils.State
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var mainViewModel: MainViewModel
     private val redditPagingAdapter by lazy {
-        RedditPagingAdapter(onRedditPostClickHandler, retryClickHandler)
+        RedditPagingAdapter(mainViewModel::handleRvItemClick, mainViewModel::retry)
     }
-    private val onRedditPostClickHandler: (id: String) -> Unit = {
-        Toast.makeText(this, "id $it", Toast.LENGTH_SHORT).show()
-    }
-    private val retryClickHandler = { mainViewModel.retry() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,21 +42,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        binding.mainRecyclerView.addItemDecoration(dividerItemDecoration)
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.mainRecyclerView.adapter = redditPagingAdapter
     }
 
     private fun setObservers() {
-
         mainViewModel.redditPublicationPageList.observe(this, {
             redditPagingAdapter.submitList(it)
         })
-
         mainViewModel.getState().observe(this, {
             if (mainViewModel.listIsEmpty().not()) {
                 redditPagingAdapter.setState(it ?: State.DONE)
             }
             updateUi(it)
+        })
+        mainViewModel.imageUrl.observe(this, {imageUrl ->
+            imageUrl ?: return@observe
+            startActivity(DetailsActivity.newIntent(this, imageUrl))
+            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out)
         })
     }
 

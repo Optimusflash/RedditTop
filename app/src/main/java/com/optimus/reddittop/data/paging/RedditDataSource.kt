@@ -5,6 +5,7 @@ import androidx.paging.PageKeyedDataSource
 import com.optimus.reddittop.data.model.RedditItem
 import com.optimus.reddittop.data.remote.RedditService
 import com.optimus.reddittop.utils.State
+import com.optimus.reddittop.utils.Thumbnail
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +28,12 @@ class RedditDataSource(private val redditService: RedditService, private val sco
                 updateState(State.LOADING)
                 val redditResponse = redditService.getTopRedditPublication()
                 val pagingToken = redditResponse.redditData.pagingToken
-                val redditItems = redditResponse.redditData.redditItems
+                val redditItems = redditResponse.redditData.redditItems.filterNot {
+                            it.redditPublication.thumbnail == Thumbnail.DEFAULT.value ||
+                            it.redditPublication.thumbnail == Thumbnail.SELF.value  ||
+                            it.redditPublication.thumbnail == Thumbnail.IMAGE.value  ||
+                            it.redditPublication.thumbnail == Thumbnail.NSFW.value
+                }
                 callback.onResult(redditItems, null, pagingToken)
                 updateState(State.DONE)
             } catch (e: Exception){
@@ -49,7 +55,12 @@ class RedditDataSource(private val redditService: RedditService, private val sco
                 val key = params.key
                 val redditResponse = redditService.getTopRedditPublication(key)
                 val pagingToken = redditResponse.redditData.pagingToken
-                val redditItems = redditResponse.redditData.redditItems
+                val redditItems = redditResponse.redditData.redditItems.filterNot {
+                            it.redditPublication.thumbnail == Thumbnail.DEFAULT.value ||
+                            it.redditPublication.thumbnail == Thumbnail.SELF.value ||
+                            it.redditPublication.thumbnail == Thumbnail.IMAGE.value ||
+                            it.redditPublication.thumbnail == Thumbnail.NSFW.value
+                }
                 callback.onResult(redditItems, pagingToken)
                 updateState(State.DONE)
             } catch (e: Exception){
