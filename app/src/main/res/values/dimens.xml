@@ -9,4 +9,6 @@
     <dimen name="global_spacing_32">32dp</dimen>
     <dimen name="button_size_32">32dp</dimen>
     <dimen name="text_size_16">16sp</dimen>
+    <dimen name="iv_btn_size_48">48dp</dimen>
+    <dimen name="global_elevation_2">2dp</dimen>
 </resources>

@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.imageUrl.observe(this, {imageUrl ->
             imageUrl ?: return@observe
             startActivity(DetailsActivity.newIntent(this, imageUrl))
-            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out)
+            overridePendingTransition(R.anim.zoom_in, R.anim.alpha_out)
         })
     }
 
