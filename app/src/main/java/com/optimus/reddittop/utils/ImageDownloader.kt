@@ -3,13 +3,11 @@ package com.optimus.reddittop.utils
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.provider.MediaStore
-import android.util.Log
-import android.widget.Toast
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.IOException
-import java.lang.Exception
 
 /**
  * Created by Dmitriy Chebotar on 20.09.2020.

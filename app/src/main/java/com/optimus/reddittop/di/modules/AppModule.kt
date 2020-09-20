@@ -3,7 +3,6 @@ package com.optimus.reddittop.di.modules
 import android.app.Application
 import com.optimus.reddittop.utils.ImageDownloader
 import dagger.Module
-
 import dagger.Provides
 import javax.inject.Singleton
 

@@ -1,13 +1,10 @@
 package com.optimus.reddittop.ui.details
 
 import android.app.Application
-import android.content.Context
 import android.graphics.Bitmap
-import android.media.Image
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.optimus.reddittop.utils.ImageDownloader
 import com.optimus.reddittop.utils.State
 import javax.inject.Inject

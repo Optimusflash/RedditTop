@@ -13,7 +13,7 @@ import com.optimus.reddittop.utils.State
 
 private const val DATA_VIEW_TYPE = 1
 private const val FOOTER_VIEW_TYPE = 2
-class RedditPagingAdapter (private val onItemClick: (id: String)->Unit, private val onRetryClick: ()->Unit): PagedListAdapter<RedditItem, RecyclerView.ViewHolder>(REDDIT_COMPARATOR)  {
+class RedditPagingAdapter (private val onItemClick: (id: String?)->Unit, private val onRetryClick: ()->Unit): PagedListAdapter<RedditItem, RecyclerView.ViewHolder>(REDDIT_COMPARATOR)  {
 
     private var state = State.LOADING
 

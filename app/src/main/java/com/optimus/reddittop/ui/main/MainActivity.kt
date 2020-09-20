@@ -2,6 +2,7 @@ package com.optimus.reddittop.ui.main
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -58,8 +59,11 @@ class MainActivity : AppCompatActivity() {
             }
             updateUi(it)
         })
-        mainViewModel.imageUrl.observe(this, {imageUrl ->
-            imageUrl ?: return@observe
+        mainViewModel.imageUrl.observe(this, { imageUrl ->
+            if (imageUrl == null) {
+                Toast.makeText(this, resources.getString(R.string.cannot_open_image), Toast.LENGTH_SHORT).show()
+                return@observe
+            }
             startActivity(DetailsActivity.newIntent(this, imageUrl))
             overridePendingTransition(R.anim.zoom_in, R.anim.alpha_out)
         })

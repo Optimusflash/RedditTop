@@ -1,6 +1,5 @@
 package com.optimus.reddittop.ui.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,10 +15,10 @@ import com.optimus.reddittop.extensions.toRelativeDateFormat
  */
 class RedditPostViewHolder(
     private val binding: RvRedditPostSellBinding,
-    private val onPostClick: (id: String) -> Unit
+    private val onPostClick: (id: String?) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     companion object {
-        fun create(parent: ViewGroup, onPostClick: (id: String) -> Unit): RedditPostViewHolder {
+        fun create(parent: ViewGroup, onPostClick: (id: String?) -> Unit): RedditPostViewHolder {
             val rvRedditPostSellBinding = RvRedditPostSellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return RedditPostViewHolder(rvRedditPostSellBinding, onPostClick)
         }
@@ -31,8 +30,8 @@ class RedditPostViewHolder(
         binding.ivRedditPostImage.loadImage(redditItem.redditPublication.thumbnail)
         binding.tvCommentsCount.text = redditItem.redditPublication.commentsCount.toString()
         binding.root.setOnClickListener {
-            val url = redditItem.redditPublication.preview?.images?.get(0)?.sourceImage?.url ?: return@setOnClickListener
-            onPostClick.invoke(url.toCorrectUrl())
+            val url = redditItem.redditPublication.preview?.images?.get(0)?.sourceImage?.url
+            onPostClick.invoke(url?.toCorrectUrl())
         }
     }
 }

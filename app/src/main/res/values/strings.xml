@@ -7,4 +7,5 @@
     <string name="toast_loading_message">Please wait…</string>
     <string name="toast_done_message">Image saved successfully</string>
     <string name="toast_error_message">Failed to save image</string>
+    <string name="cannot_open_image">Cannot open image. Empty data</string>
 </resources>

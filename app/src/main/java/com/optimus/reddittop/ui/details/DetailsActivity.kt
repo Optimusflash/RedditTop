@@ -1,34 +1,21 @@
 package com.optimus.reddittop.ui.details
 
+
 import android.Manifest
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.optimus.reddittop.R
 import com.optimus.reddittop.databinding.ActivityDetailBinding
-
-
 import com.optimus.reddittop.di.Injector
 import com.optimus.reddittop.di.ViewModelFactory
 import com.optimus.reddittop.extensions.loadImage
-import com.optimus.reddittop.utils.ImageDownloader
 import com.optimus.reddittop.utils.State
-import java.io.IOException
 import javax.inject.Inject
 
 
@@ -89,7 +76,7 @@ class DetailsActivity : AppCompatActivity() {
     private fun updateUi(it: State?) {
         when(it){
             State.LOADING -> Toast.makeText(this, resources.getString(R.string.toast_loading_message), Toast.LENGTH_SHORT).show()
-            State.DONE -> Toast.makeText(this, resources.getString(R.string.toast_error_message), Toast.LENGTH_SHORT).show()
+            State.DONE -> Toast.makeText(this, resources.getString(R.string.toast_done_message), Toast.LENGTH_SHORT).show()
             else -> Toast.makeText(this, resources.getString(R.string.toast_error_message), Toast.LENGTH_SHORT).show()
         }
     }

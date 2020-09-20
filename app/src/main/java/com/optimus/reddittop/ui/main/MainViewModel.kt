@@ -1,6 +1,5 @@
 package com.optimus.reddittop.ui.main
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -48,7 +47,7 @@ class MainViewModel @Inject constructor(private val repository: RedditRepository
         return _redditItemPageList.value?.isEmpty() ?: true
     }
 
-    fun handleRvItemClick(imageUrl: String){
+    fun handleRvItemClick(imageUrl: String?){
         _imageUrl.value = imageUrl
     }
 }

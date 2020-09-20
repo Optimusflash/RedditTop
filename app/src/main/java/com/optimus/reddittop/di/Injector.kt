@@ -1,7 +1,6 @@
 package com.optimus.reddittop.di
 
 import android.app.Application
-import android.content.Context
 import com.optimus.reddittop.di.modules.AppModule
 import com.optimus.reddittop.di.modules.RemoteModule
 
