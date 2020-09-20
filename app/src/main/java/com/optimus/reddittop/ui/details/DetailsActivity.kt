@@ -26,14 +26,14 @@ import com.optimus.reddittop.databinding.ActivityDetailBinding
 import com.optimus.reddittop.di.Injector
 import com.optimus.reddittop.di.ViewModelFactory
 import com.optimus.reddittop.extensions.loadImage
+import com.optimus.reddittop.utils.ImageDownloader
+import com.optimus.reddittop.utils.State
 import java.io.IOException
 import javax.inject.Inject
 
 
 class DetailsActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityDetailBinding
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var detailsViewModel: DetailsViewModel
@@ -50,7 +50,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ActivityCompat.requestPermissions(this,  arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1);
+        ActivityCompat.requestPermissions(this,  arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1); //TODO
         ActivityCompat.requestPermissions(this,  arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1);
         initDaggerComponent()
         initViewModels()
@@ -69,42 +69,29 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        binding.ivBtnDownload.setOnClickListener { saveImage() }
+        binding.ivBtnDownload.setOnClickListener {
+            val bitmap = (binding.ivDetails.drawable as? BitmapDrawable)?.bitmap
+            detailsViewModel.loadImageToGallery(bitmap)
+        }
         binding.ivBtnBack.setOnClickListener { onBackPressed() }
-    }
-
-    private fun saveImage() {
-        Toast.makeText(this, "Saving image. Please wait...", Toast.LENGTH_SHORT).show()
-        val ivDetails = binding.ivDetails
-        val bitmap = (ivDetails.drawable as BitmapDrawable).bitmap
-        val values = ContentValues().apply {
-            put(MediaStore.Images.Media.DISPLAY_NAME, System.currentTimeMillis().toString())
-            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-        }
-        val collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        val imageUri = applicationContext.contentResolver.insert(collection, values)
-
-        try {
-            val stream = this.contentResolver.openOutputStream(imageUri!!)
-            stream?.let {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
-            }
-            stream?.flush()
-            stream?.close()
-            Toast.makeText(this, "Image Saved Successfully", Toast.LENGTH_SHORT).show()
-
-        } catch (e: IOException) {
-            Toast.makeText(this, "Failed To Save Image. Please Try Again", Toast.LENGTH_SHORT).show()
-        }
-
     }
 
       private fun setObservers() {
         intent.getStringExtra(EXTRA_IMAGE_URL)?.let(detailsViewModel::handleImageUrl)
         detailsViewModel.imageUrl.observe(this, {
             binding.ivDetails.loadImage(it)
-
         })
+        detailsViewModel.downloadImageState.observe(this, {
+            updateUi(it)
+        })
+    }
+
+    private fun updateUi(it: State?) {
+        when(it){
+            State.LOADING -> Toast.makeText(this, resources.getString(R.string.toast_loading_message), Toast.LENGTH_SHORT).show()
+            State.DONE -> Toast.makeText(this, resources.getString(R.string.toast_error_message), Toast.LENGTH_SHORT).show()
+            else -> Toast.makeText(this, resources.getString(R.string.toast_error_message), Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onBackPressed() {

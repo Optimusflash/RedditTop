@@ -4,4 +4,7 @@
     <string name="posted_by">Posted by:</string>
     <string name="retry">Retry</string>
     <string name="error_message">Something was wrong. Click to retry…</string>
+    <string name="toast_loading_message">Please wait…</string>
+    <string name="toast_done_message">Image saved successfully</string>
+    <string name="toast_error_message">Failed to save image</string>
 </resources>

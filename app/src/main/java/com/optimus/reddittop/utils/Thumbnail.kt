@@ -8,5 +8,6 @@ enum class Thumbnail (val value: String){
     DEFAULT( "default"),
     SELF ( "self"),
     IMAGE ( "image"),
-    NSFW ( "nsfw")
+    NSFW ( "nsfw"),
+    SPOILER ( "spoiler")
 }

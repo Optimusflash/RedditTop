@@ -32,16 +32,16 @@ data class RedditPublication(
     val commentsCount: Int?,
     @SerializedName("created_utc")
     val createdDate: Double?,
-    val preview: Preview
+    val preview: Preview?
 )
 
 data class Preview(
-    val images: List<Image>
+    val images: List<Image>?
 )
 
 data class Image(
     @SerializedName("source")
-    val sourceImage: SourceImage
+    val sourceImage: SourceImage?
 )
 
 data class SourceImage(

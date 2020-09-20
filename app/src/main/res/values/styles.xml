@@ -7,4 +7,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ImageViewBtnStyle">
+        <item name="android:layout_width">@dimen/iv_btn_size_48</item>
+        <item name="android:layout_height">@dimen/iv_btn_size_48</item>
+        <item name="android:elevation">@dimen/global_elevation_2</item>
+        <item name="android:padding">@dimen/global_spacing_8</item>
+        <item name="android:layout_marginTop">@dimen/global_spacing_8</item>
+        <item name="android:background">@drawable/ripple</item>
+        <item name="android:focusable">true</item>
+    </style>
 </resources>

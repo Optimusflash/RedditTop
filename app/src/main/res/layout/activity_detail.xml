@@ -9,30 +9,19 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_btn_back"
-        android:layout_width="@dimen/iv_btn_size_48"
-        android:layout_height="@dimen/iv_btn_size_48"
-        android:elevation="@dimen/global_elevation_2"
-        android:padding="@dimen/global_spacing_8"
-        android:layout_marginTop="@dimen/global_spacing_8"
+        style="@style/ImageViewBtnStyle"
         android:layout_marginStart="@dimen/global_spacing_8"
         android:src="@drawable/ic_baseline_arrow_back_32"
-        android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_btn_download"
-        android:layout_width="@dimen/iv_btn_size_48"
-        android:layout_height="@dimen/iv_btn_size_48"
-        android:elevation="@dimen/global_elevation_2"
-        android:padding="@dimen/global_spacing_8"
+        style="@style/ImageViewBtnStyle"
         android:src="@drawable/ic_baseline_get_app_32"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_marginTop="@dimen/global_spacing_8"
         android:layout_marginEnd="@dimen/global_spacing_8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_details"

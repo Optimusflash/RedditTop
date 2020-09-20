@@ -1,6 +1,7 @@
 package com.optimus.reddittop.di
 
 import com.optimus.reddittop.data.paging.RedditDataSourceFactory
+import com.optimus.reddittop.di.modules.AppModule
 import com.optimus.reddittop.ui.main.MainActivity
 import com.optimus.reddittop.di.modules.RemoteModule
 import com.optimus.reddittop.di.modules.ViewModelModule
@@ -12,7 +13,7 @@ import javax.inject.Singleton
  * Created by Dmitriy Chebotar on 18.09.2020.
  */
 @Singleton
-@Component(modules = [RemoteModule::class, ViewModelModule::class])
+@Component(modules = [RemoteModule::class, ViewModelModule::class, AppModule::class])
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(detailsActivity: DetailsActivity)

@@ -1,5 +1,6 @@
 package com.optimus.reddittop.ui.main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,9 @@ class RedditPostViewHolder(
         binding.tvDateCreated.text = redditItem.redditPublication.createdDate?.toRelativeDateFormat()
         binding.ivRedditPostImage.loadImage(redditItem.redditPublication.thumbnail)
         binding.tvCommentsCount.text = redditItem.redditPublication.commentsCount.toString()
-        binding.root.setOnClickListener { onPostClick.invoke(redditItem.redditPublication.preview.images[0].sourceImage.url.toCorrectUrl())}
+        binding.root.setOnClickListener {
+            val url = redditItem.redditPublication.preview?.images?.get(0)?.sourceImage?.url ?: return@setOnClickListener
+            onPostClick.invoke(url.toCorrectUrl())
+        }
     }
 }
