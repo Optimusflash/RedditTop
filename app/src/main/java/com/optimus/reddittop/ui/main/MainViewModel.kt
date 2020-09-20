@@ -1,5 +1,6 @@
 package com.optimus.reddittop.ui.main
 
+import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -7,6 +8,7 @@ import com.optimus.reddittop.data.model.RedditItem
 import com.optimus.reddittop.data.paging.RedditDataSource
 import com.optimus.reddittop.data.paging.RedditDataSourceFactory
 import com.optimus.reddittop.data.repositories.RedditRepository
+import com.optimus.reddittop.utils.SingleLiveEvent
 import com.optimus.reddittop.utils.State
 import javax.inject.Inject
 
@@ -18,7 +20,7 @@ class MainViewModel @Inject constructor(private val repository: RedditRepository
     val redditPublicationPageList: LiveData<PagedList<RedditItem>>
         get() = _redditItemPageList
     private lateinit var _redditDataSource: MutableLiveData<RedditDataSource>
-    private val _imageUrl = MutableLiveData<String>()
+    private val _imageUrl = SingleLiveEvent<String>()
     val imageUrl: LiveData<String>
         get() = _imageUrl
 
@@ -48,6 +50,7 @@ class MainViewModel @Inject constructor(private val repository: RedditRepository
     }
 
     fun handleRvItemClick(imageUrl: String?){
+        Log.e("M_MainViewModel", "handleRvItemClick")
         _imageUrl.value = imageUrl
     }
 }

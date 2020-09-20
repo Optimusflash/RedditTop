@@ -12,6 +12,7 @@ import com.optimus.reddittop.databinding.ActivityMainBinding
 import com.optimus.reddittop.di.Injector
 import com.optimus.reddittop.di.ViewModelFactory
 import com.optimus.reddittop.ui.details.DetailsActivity
+import com.optimus.reddittop.ui.main.adapter.RedditPagingAdapter
 import com.optimus.reddittop.utils.State
 import javax.inject.Inject
 

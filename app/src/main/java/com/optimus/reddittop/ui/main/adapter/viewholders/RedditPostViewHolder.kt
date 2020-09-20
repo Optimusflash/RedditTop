@@ -1,4 +1,4 @@
-package com.optimus.reddittop.ui.main
+package com.optimus.reddittop.ui.main.adapter.viewholders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

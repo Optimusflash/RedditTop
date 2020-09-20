@@ -1,10 +1,12 @@
-package com.optimus.reddittop.ui.main
+package com.optimus.reddittop.ui.main.adapter
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.optimus.reddittop.data.model.RedditItem
+import com.optimus.reddittop.ui.main.adapter.viewholders.RedditPagingFooterViewHolder
+import com.optimus.reddittop.ui.main.adapter.viewholders.RedditPostViewHolder
 import com.optimus.reddittop.utils.State
 
 /**
@@ -13,7 +15,9 @@ import com.optimus.reddittop.utils.State
 
 private const val DATA_VIEW_TYPE = 1
 private const val FOOTER_VIEW_TYPE = 2
-class RedditPagingAdapter (private val onItemClick: (id: String?)->Unit, private val onRetryClick: ()->Unit): PagedListAdapter<RedditItem, RecyclerView.ViewHolder>(REDDIT_COMPARATOR)  {
+class RedditPagingAdapter (private val onItemClick: (id: String?)->Unit, private val onRetryClick: ()->Unit): PagedListAdapter<RedditItem, RecyclerView.ViewHolder>(
+    REDDIT_COMPARATOR
+)  {
 
     private var state = State.LOADING
 

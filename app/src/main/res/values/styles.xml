@@ -13,7 +13,7 @@
         <item name="android:elevation">@dimen/global_elevation_2</item>
         <item name="android:padding">@dimen/global_spacing_8</item>
         <item name="android:layout_marginTop">@dimen/global_spacing_8</item>
-        <item name="android:background">@drawable/ripple</item>
+        <item name="android:background">@drawable/circular_item_background_selector</item>
         <item name="android:focusable">true</item>
     </style>
 </resources>
