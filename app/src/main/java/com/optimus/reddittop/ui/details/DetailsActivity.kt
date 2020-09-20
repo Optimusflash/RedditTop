@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -90,7 +91,10 @@ class DetailsActivity : AppCompatActivity() {
     private fun setObservers() {
         intent.getStringExtra(EXTRA_IMAGE_URL)?.let(detailsViewModel::handleImageUrl)
         detailsViewModel.imageUrl.observe(this, {
-            binding.ivDetails.loadImage(it)
+            binding.ivDetails.loadImage(it) { isReady ->
+                binding.progressBarDetailsImage.visibility =
+                    if (isReady) View.GONE else View.VISIBLE
+            }
         })
         detailsViewModel.downloadImageState.observe(this, {
             updateUi(it)

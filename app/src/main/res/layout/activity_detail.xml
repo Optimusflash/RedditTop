@@ -34,4 +34,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/kote" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar_details_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/global_spacing_4"
+        android:elevation="@dimen/global_elevation_2"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>
